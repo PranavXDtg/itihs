@@ -12,7 +12,7 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
 
 body {
-  background: #50514F;
+  background: #F4C430;
   color: #fff;
   font-family: 'Open Sans', sans-serif;
   margin: 0;
@@ -34,13 +34,31 @@ h1 {
   align-items: center;
   height: 100vh;
 }
+
+#result {
+  font-size: 36px;
+  color: #fff;
+}
+
+#ans {
+  color: #fff;
+  padding: 20px;
+  font-size: 26px;
+  background: transparent;
+  border: 0; 
+}
+
+#ans:focus {
+  outline: 0;
+  outline-offset: 0;
+}
 </style>
 <script>
 var questions = [
     'Whats your name ?',
     'Where are you from?',
     'What\'s your age?',
-    'What profile you are working on?',
+    'In Which Standard Are You Studying in ?',
     'It was nice talking you :)'
 ];
 var num = 0;
@@ -63,4 +81,39 @@ function showResponse() {
   } else if(num == 1) {
     output.innerHTML = `${input} must be a good place`;
     inputBox.value = "";
+    inputBox.setAttribute("placeholder", "Wait for 2 secs");
+    ++num;
+    setTimeout(changeQuestion, 2000);
+  } else if(num == 2) {
+    output.innerHTML = `So you are ${2022 - input} born`;
+    inputBox.value = "";
+    inputBox.setAttribute("placeholder", "Wait for 2 secs");
+    ++num;
+    setTimeout(changeQuestion, 2000);
+  } else if(num == 3) {
+    output.innerHTML = `Awesome ${input}`;
+    inputBox.value = "";
+    inputBox.setAttribute("placeholder", "Wait for 2 secs");
+    ++num;
+    setTimeout(changeQuestion, 2000);
+  }
+  }
+}
+
+function changeQuestion() {
+  inputBox.setAttribute("placeholder", "Enter your response");
+  output.innerHTML = questions[num];
+  if(num == 4) {
+    inputBox.style.display = "none";
+  }
+}
+
+$(document).on('keypress', function(e) {
+  if(e.which == 13) {
+    showResponse();
+  }
+})
+
+$( "#ans" ).focus();
+
     </script>
